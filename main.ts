@@ -16,7 +16,9 @@ Deno.serve({ port: 3000 }, async (req) => {
                     body: JSON.stringify({
                         client_id: Deno.env.get("HCA_CLIENT_ID"),
                         client_secret: Deno.env.get("HCA_CLIENT_SECRET"),
-                        redirect_uri: url.origin + url.pathname,
+                        redirect_uri: Deno.env.get("HCA_REDIRECT_URL")
+                            ? Deno.env.get("HCA_REDIRECT_URL")
+                            : url.origin + url.pathname,
                         code,
                         grant_type: "authorization_code",
                     }),
